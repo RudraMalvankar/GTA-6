@@ -32,7 +32,66 @@ function App() {
     });
   });
 
+  
+  useGSAP(() => {
+    if (!showContent) return;
 
+    gsap.to(".main", {
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      delay: "-1",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".sky", {
+      scale: 1.1,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".bg", {
+      scale: 1.1,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".character", {
+      scale: 1.3,
+      x: "-50%",
+      bottom: "-25%",
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".text", {
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+    const main = document.querySelector(".main");
+
+    main?.addEventListener("mousemove", function (e) {
+      const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+      gsap.to(".main .text", {
+        x: `${xMove * 0.4}%`,
+      });
+      gsap.to(".sky", {
+        x: xMove,
+      });
+      gsap.to(".bg", {
+        x: xMove * 1.7,
+      });
+    });
+  },[showContent]);
     
 
   return (
@@ -86,25 +145,25 @@ function App() {
   
             <div className="imagesdiv relative overflow-hidden w-full h-screen">
               <img
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="sky absolute top-0 left-0 w-full h-full object-cover scale-[1.5]"
                 src="./sky.png"
                 alt=""
               />
               <img
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute bg top-0 left-0 w-full h-full object-cover"
                 src="./bg.png"
                 alt=""
               />
-            <div className="test absolute flex flex-col gap-3 top-24 left-1/2 -translate-x1/2 text-white"> 
-             <h1 className="text-9xl -ml-90 ">Grand </h1> 
-             <h1 className="text-9xl ml-20 ">Theft </h1> 
-             <h1 className="text-9xl -ml-80 ">Auto </h1> 
+            <div className="text absolute flex flex-col gap-3 top-20 left-1/2 -translate-x1/2 text-white"> 
+             <h1 className="text-9xl -ml-100 ">Grand </h1> 
+             <h1 className="text-9xl ml-30 ">Theft </h1> 
+             <h1 className="text-9xl -ml-90 ">Auto </h1> 
              {/* <h1 className="text-9xl ml-70 "> VI </h1>  */}
 
             </div>
 
               <img
-                className="absolute -bottom-[] left-1/2 -translate-x-1/2 scale-[0.92]"
+                className="absolute character top-[15%] left-1/2 -translate-x-1/2  scale-[0.3] rotate-[-20deg]"
                 src="./girlbg.png"
                 alt=""
               />
@@ -123,16 +182,22 @@ function App() {
                 alt=""
               />
               <div className="w-full flex justify-end px-10">
-                 <div className="flex gap-4 items-center">
-                  <h3 className="text-3xl  -mt-[26px] leading-none text-white">
-                  Rudra Malvankar
+                <a
+                 href="https://rudramalvankar.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 items-center">
+                  <h3 className="text-3xl -mt-[26px] leading-none text-white hover:underline cursor-pointer">
+                     Rudra Malvankar
                   </h3>
-                </div>
+                </a>
               </div>
-
             </div>
+            
           </div>
+           
         </div>
+        
       )}
     </>
   );
